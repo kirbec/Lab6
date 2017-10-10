@@ -45,7 +45,17 @@ public class FrontCompression {
          * Complete this function.
          */
 
-        return "";
+        String newCorpus = "";
+        String[] corpusArray = corpus.split("\n");
+        newCorpus += "0 " + corpusArray[0] + "\n";
+        int prefixLength = 0;
+
+        for (int i = 1; i < corpusArray.length; i++) {
+            prefixLength = longestPrefix(corpusArray[i - 1], corpusArray[i]);
+            newCorpus += (prefixLength + " " + corpusArray[i].substring(prefixLength) + "\n");
+        }
+
+        return newCorpus;
     }
 
     /**
@@ -68,7 +78,23 @@ public class FrontCompression {
          * Complete this function.
          */
 
-        return "";
+        String newCorpus = "";
+
+        String[] corpusArray = corpus.split("\n");
+        newCorpus += (corpusArray[0].substring(2) + "\n");
+        String previousWord = corpusArray[0].substring(2);
+        String postFix = corpusArray[0].substring(corpusArray[0].indexOf(" ") + 1);
+        int parseLength = 0;
+
+        for (int i = 1; i < corpusArray.length; i++) {
+            parseLength =
+                    Integer.parseInt(corpusArray[i].substring(0, corpusArray[i].indexOf(" ")));
+            newCorpus += (previousWord.substring(0, parseLength)
+                    + corpusArray[i].substring(corpusArray[i].indexOf(" ") + 1) + "\n");
+            previousWord = previousWord.substring(0, parseLength)
+                    + corpusArray[i].substring(corpusArray[i].indexOf(" ") + 1);
+        }
+        return newCorpus;
     }
 
     /**
@@ -82,7 +108,18 @@ public class FrontCompression {
         /*
          * Complete this function.
          */
-        return 0;
+
+        char[] firstStringChars = firstString.toCharArray();
+        char[] secondStringChars = secondString.toCharArray();
+        int count = 0;
+
+        for (int i = 0; i < firstStringChars.length && i < secondStringChars.length; i++) {
+            if (firstStringChars[i] != secondStringChars[i]) {
+                break;
+            }
+            count++;
+        }
+        return count;
     }
 
     /**
