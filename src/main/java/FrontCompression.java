@@ -109,12 +109,10 @@ public class FrontCompression {
          * Complete this function.
          */
 
-        char[] firstStringChars = firstString.toCharArray();
-        char[] secondStringChars = secondString.toCharArray();
         int count = 0;
 
-        for (int i = 0; i < firstStringChars.length && i < secondStringChars.length; i++) {
-            if (firstStringChars[i] != secondStringChars[i]) {
+        for (int i = 1; i < firstString.length() && i < secondString.length(); i++) {
+            if (!firstString.substring(i - 1, i).equals(secondString.substring(i - 1, i))) {
                 break;
             }
             count++;
